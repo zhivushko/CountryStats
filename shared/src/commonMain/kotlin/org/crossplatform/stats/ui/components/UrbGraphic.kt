@@ -15,9 +15,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import org.crossplatform.stats.data.Country
 import org.crossplatform.stats.resources.Res
-import org.crossplatform.stats.resources.country_neighbours
 import org.crossplatform.stats.resources.country_rur
 import org.crossplatform.stats.resources.country_urb
+import org.crossplatform.stats.resources.urbanization
 import org.jetbrains.compose.resources.stringResource
 
 private val UrbColor = Color(0xFF10C300)
@@ -34,7 +34,7 @@ fun UrbGraphic(
     val urbHeight = (maxHeight * country.urb_tot / 100f).toInt().coerceIn(minHeight,maxHeight)
     val rurHeight = (maxHeight * country.rur_tot / 100f).toInt().coerceIn(minHeight,maxHeight)
     Column {
-        Text(text = stringResource(Res.string.country_neighbours) + ":")
+        Text(text = stringResource(Res.string.urbanization) + ":")
         Spacer(Modifier.height(16.dp))
         Row(
             modifier = modifier

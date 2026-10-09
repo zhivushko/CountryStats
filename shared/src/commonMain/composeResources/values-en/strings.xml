@@ -12,4 +12,5 @@
     <string name = "people_unit">people</string>
     <string name = "country_neighbours">Country neighbours</string>
     <string name = "no_results">Not found :(</string>
+    <string name = "urbanization">Urbanization</string>
 </resources>
