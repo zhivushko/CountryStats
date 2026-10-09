@@ -11,4 +11,5 @@
     <string name = "country_code">Код страны</string>
     <string name = "people_unit">чел.</string>
     <string name = "country_neighbours">Страны-соседи</string>
+    <string name = "no_results">Не найдено :(</string>
 </resources>

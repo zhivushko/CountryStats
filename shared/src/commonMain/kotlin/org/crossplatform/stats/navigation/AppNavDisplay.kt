@@ -56,7 +56,8 @@
                             state = state,
                             onCountryClick = { id ->
                                 listViewModel.onIntent(CountryListIntent.CardClicked(id))
-                            }
+                            },
+                            onQueryChange = { value -> listViewModel.onIntent(CountryListIntent.QueryChanged(value))}
                         )
                     }
 
