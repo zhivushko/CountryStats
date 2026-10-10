@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <string name="app_name">Country Stats</string>
+    <string name="country_name">Name</string>
+    <string name="country_capital">Capital</string>
+    <string name="country_region">Region</string>
+    <string name="country_popularity">Population</string>
+    <string name="country_urb">Urban population</string>
+    <string name="country_rur">Rural population</string>
+    <string name="country_gdp">GDP</string>
+    <string name = "country_code">Country Code</string>
+    <string name = "people_unit">people</string>
+    <string name = "country_neighbours">Country neighbours</string>
+    <string name = "no_results">Not found :(</string>
+    <string name = "urbanization">Urbanization</string>
+    <string name = "search">Search</string>
+</resources>
