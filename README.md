@@ -79,7 +79,7 @@ ViewModel хранит `MutableStateFlow` состояния, обрабатыв
 ./gradlew :androidApp:assembleDebug
 
 # Desktop (JVM)
-./gradlew :shared:run
+./gradlew :desktopApp:run
 
 # JS (browser)
 ./gradlew :webApp:jsBrowserDevelopmentRun

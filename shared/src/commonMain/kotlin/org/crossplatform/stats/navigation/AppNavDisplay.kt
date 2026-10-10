@@ -7,6 +7,7 @@
     import androidx.compose.foundation.layout.RowScope
     import androidx.compose.foundation.layout.fillMaxSize
     import androidx.compose.runtime.Composable
+    import androidx.compose.runtime.LaunchedEffect
     import androidx.compose.runtime.collectAsState
     import androidx.compose.runtime.getValue
     import androidx.compose.runtime.remember
@@ -14,10 +15,11 @@
     import androidx.lifecycle.viewmodel.compose.viewModel
     import androidx.navigation3.runtime.entryProvider
     import androidx.navigation3.ui.NavDisplay
-    import org.crossplatform.stats.ui.viewmodel.CountryListViewModel
+
+    import org.crossplatform.stats.list.CountryListViewModel
     import org.crossplatform.stats.data.CountryRepositoryImpl
-    import org.crossplatform.stats.ui.viewmodel.CountryDetailedViewModel
-    import org.crossplatform.stats.domain.CountryListIntent
+    import org.crossplatform.stats.detail.CountryDetailedViewModel
+    import org.crossplatform.stats.list.CountryListIntent
     import org.crossplatform.stats.domain.Screen
     import org.crossplatform.stats.ui.screen.CountryDetailScreen
     import org.crossplatform.stats.ui.screen.CountryListScreen
@@ -36,6 +38,9 @@
                 repository = repository,
             )
         }
+        val detailViewModel = viewModel { CountryDetailedViewModel(
+            repository = repository,
+        ) }
 
         val backStack by navigator.backStack.collectAsState()
 
@@ -62,11 +67,10 @@
                     }
 
                     entry<Screen.Detail> { key ->
-                        val detailViewModel =
-                            CountryDetailedViewModel(
-                                countryId = key.id,
-                                repository = repository,
-                            )
+                        // lauched effect чтобы у меня прила не пыталась при каждой перерисовке экрана снабжать view model страной
+                        LaunchedEffect(key.id) {
+                            detailViewModel.load(key.id)
+                        }
                         val state by detailViewModel.state.collectAsState()
 
                         CountryDetailScreen(

@@ -16,6 +16,7 @@ val darkColors = darkColorScheme(
     primary = Color(0xFF90CAF9),
     background = Color(0xFF121212)
 )
+val CardNumColor = Color(0xFF10C300)
 @Composable
 fun AppTheme(darkTheme: Boolean,
              content: @Composable () -> Unit)

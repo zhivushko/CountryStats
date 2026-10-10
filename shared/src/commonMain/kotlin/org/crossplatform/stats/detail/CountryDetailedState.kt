@@ -1,4 +1,4 @@
-package org.crossplatform.stats.domain
+package org.crossplatform.stats.detail
 
 import org.crossplatform.stats.data.Country
 import org.crossplatform.stats.ui.model.CountryCardUI

@@ -1,4 +1,4 @@
-package org.crossplatform.stats.domain
+package org.crossplatform.stats.list
 
 import org.crossplatform.stats.data.Country
 

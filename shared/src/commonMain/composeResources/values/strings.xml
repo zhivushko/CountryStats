@@ -13,4 +13,5 @@
     <string name = "country_neighbours">Страны-соседи</string>
     <string name = "no_results">Не найдено :(</string>
     <string name = "urbanization">Урбанизация</string>
+    <string name = "search">Поиск</string>
 </resources>

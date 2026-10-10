@@ -1,4 +1,4 @@
-package org.crossplatform.stats.ui.viewmodel
+package org.crossplatform.stats.list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,8 +8,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.crossplatform.stats.domain.CountryListIntent
-import org.crossplatform.stats.domain.CountryListState
 import org.crossplatform.stats.domain.CountryRepository
 import org.crossplatform.stats.domain.getCountries
 import org.crossplatform.stats.navigation.AppViewModel

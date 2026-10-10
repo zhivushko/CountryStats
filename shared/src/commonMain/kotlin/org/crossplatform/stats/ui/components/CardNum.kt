@@ -13,13 +13,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import org.crossplatform.stats.ui.CardNumColor
 
 @Composable
 fun CardNum(value: Int)
 {
     Row(modifier = Modifier
         .clip(RoundedCornerShape(4.dp))
-        .background(Color(0xFF10C300))
+        .background(CardNumColor)
         .padding(horizontal = 4.dp, vertical = 0.dp)   )
     {
         Text(text = "#" + value.toString().padStart(3, '0'))
