@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <string name="app_name">Country Stats</string>
+    <string name="country_name">Название</string>
+    <string name="country_capital">Столица</string>
+    <string name="country_region">Регион</string>
+    <string name="country_popularity">Население</string>
+    <string name="country_urb">Городское население</string>
+    <string name="country_rur">Сельское население</string>
+    <string name="country_gdp">ВВП</string>
+    <string name = "country_code">Код страны</string>
+    <string name = "people_unit">чел.</string>
+    <string name = "country_neighbours">Страны-соседи</string>
+    <string name = "no_results">Не найдено :(</string>
+    <string name = "urbanization">Урбанизация</string>
+    <string name = "search">Поиск</string>
+</resources>
