@@ -1,4 +1,4 @@
-package org.crossplatform.stats.domain
+package org.crossplatform.stats.ui.navigation
 
 sealed interface Screen
 {

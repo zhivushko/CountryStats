@@ -1,7 +1,5 @@
 package org.crossplatform.stats.domain
 
-import org.crossplatform.stats.data.Country
-
 
 interface CountryRepository
 {

@@ -1,6 +1,6 @@
-package org.crossplatform.stats.list
+package org.crossplatform.stats.ui.list
 
-import org.crossplatform.stats.data.Country
+import org.crossplatform.stats.domain.Country
 
 data class CountryListState(
     val query: String = "",

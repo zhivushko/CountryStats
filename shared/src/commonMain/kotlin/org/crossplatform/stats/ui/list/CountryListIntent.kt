@@ -1,4 +1,4 @@
-package org.crossplatform.stats.list
+package org.crossplatform.stats.ui.list
 
 sealed interface CountryListIntent {
     data class CardClicked(val id: Int) : CountryListIntent

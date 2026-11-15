@@ -1,4 +1,4 @@
-package org.crossplatform.stats.detail
+package org.crossplatform.stats.ui.detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

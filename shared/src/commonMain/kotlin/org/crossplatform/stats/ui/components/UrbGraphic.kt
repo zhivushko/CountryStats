@@ -1,6 +1,5 @@
 package org.crossplatform.stats.ui.components
 
-import org.crossplatform.stats.ui.components.Bar
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -13,7 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import org.crossplatform.stats.data.Country
+import org.crossplatform.stats.domain.Country
 import org.crossplatform.stats.resources.Res
 import org.crossplatform.stats.resources.country_rur
 import org.crossplatform.stats.resources.country_urb

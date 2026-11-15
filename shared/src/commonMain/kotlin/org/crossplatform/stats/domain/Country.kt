@@ -1,4 +1,4 @@
-package org.crossplatform.stats.data
+package org.crossplatform.stats.domain
 
 /**
  * Одна запись каталога.

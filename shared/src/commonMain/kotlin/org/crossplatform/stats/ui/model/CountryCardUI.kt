@@ -1,6 +1,6 @@
 package org.crossplatform.stats.ui.model
 
-import org.crossplatform.stats.data.Country
+import org.crossplatform.stats.domain.Country
 
 data class CountryCardUI(
     val id: Int,

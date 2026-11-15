@@ -15,7 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import org.crossplatform.stats.resources.Res
 import org.crossplatform.stats.resources.search
-import org.crossplatform.stats.list.CountryListState
+import org.crossplatform.stats.ui.list.CountryListState
 import org.crossplatform.stats.ui.components.CountryList
 import org.crossplatform.stats.ui.model.toCardsUI
 import org.jetbrains.compose.resources.stringResource

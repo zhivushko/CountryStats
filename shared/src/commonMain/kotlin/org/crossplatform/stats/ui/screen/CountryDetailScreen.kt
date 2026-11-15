@@ -9,7 +9,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import org.crossplatform.stats.detail.CountryDetailedState
+import org.crossplatform.stats.ui.detail.CountryDetailedState
 import org.crossplatform.stats.ui.components.CountryDetailed
 
 @Composable

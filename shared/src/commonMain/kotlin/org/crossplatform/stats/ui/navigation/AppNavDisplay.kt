@@ -1,4 +1,4 @@
-    package org.crossplatform.stats.navigation
+package org.crossplatform.stats.ui.navigation
 
     import androidx.compose.animation.core.tween
     import androidx.compose.animation.slideInHorizontally
@@ -16,11 +16,10 @@
     import androidx.navigation3.runtime.entryProvider
     import androidx.navigation3.ui.NavDisplay
 
-    import org.crossplatform.stats.list.CountryListViewModel
+    import org.crossplatform.stats.ui.list.CountryListViewModel
     import org.crossplatform.stats.data.CountryRepositoryImpl
-    import org.crossplatform.stats.detail.CountryDetailedViewModel
-    import org.crossplatform.stats.list.CountryListIntent
-    import org.crossplatform.stats.domain.Screen
+    import org.crossplatform.stats.ui.detail.CountryDetailedViewModel
+    import org.crossplatform.stats.ui.list.CountryListIntent
     import org.crossplatform.stats.ui.screen.CountryDetailScreen
     import org.crossplatform.stats.ui.screen.CountryListScreen
     import org.crossplatform.stats.ui.AppScaffold

@@ -1,5 +1,7 @@
 package org.crossplatform.stats.data
 
+import org.crossplatform.stats.domain.Country
+
 val CountryMocks: List<Country> = listOf(
     Country(
         id = 1,

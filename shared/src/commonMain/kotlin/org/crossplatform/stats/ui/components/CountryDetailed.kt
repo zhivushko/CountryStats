@@ -9,7 +9,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import org.crossplatform.stats.data.Country
+import org.crossplatform.stats.domain.Country
 import org.crossplatform.stats.resources.Res
 import org.crossplatform.stats.resources.country_neighbours
 import org.crossplatform.stats.ui.model.CountryCardUI

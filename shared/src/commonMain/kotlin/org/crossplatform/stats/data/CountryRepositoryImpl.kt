@@ -1,5 +1,6 @@
 package org.crossplatform.stats.data
 
+import org.crossplatform.stats.domain.Country
 import org.crossplatform.stats.domain.CountryRepository
 
 class CountryRepositoryImpl : CountryRepository
