@@ -2,15 +2,15 @@ package org.crossplatform.stats.ui.list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import org.crossplatform.stats.ui.navigation.Screen
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.crossplatform.stats.domain.CountryRepository
-import org.crossplatform.stats.domain.getCountries
+import org.crossplatform.stats.domain.repository.CountryRepository
+import org.crossplatform.stats.domain.repository.getCountries
 import org.crossplatform.stats.ui.navigation.AppViewModel
+import org.crossplatform.stats.ui.navigation.Screen
 
 class CountryListViewModel(
     private val navigator: AppViewModel,

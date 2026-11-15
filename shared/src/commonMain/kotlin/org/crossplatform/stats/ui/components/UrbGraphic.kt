@@ -12,7 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import org.crossplatform.stats.domain.Country
+import org.crossplatform.stats.domain.model.Country
 import org.crossplatform.stats.resources.Res
 import org.crossplatform.stats.resources.country_rur
 import org.crossplatform.stats.resources.country_urb

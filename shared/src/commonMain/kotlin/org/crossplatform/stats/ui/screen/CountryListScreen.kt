@@ -15,26 +15,24 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import org.crossplatform.stats.resources.Res
 import org.crossplatform.stats.resources.search
-import org.crossplatform.stats.ui.list.CountryListState
 import org.crossplatform.stats.ui.components.CountryList
+import org.crossplatform.stats.ui.list.CountryListState
 import org.crossplatform.stats.ui.model.toCardsUI
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun CountryListScreen(
     state: CountryListState,
-    onQueryChange : (String) -> Unit,
-    onCountryClick: (Int) -> Unit,
+    onQueryChange: (String) -> Unit,
+    onCountryClick: (String) -> Unit,
     modifier: Modifier = Modifier.fillMaxSize(),
 ) {
-
     Box(modifier = modifier) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState()),
-            ) {
-
+        ) {
             OutlinedTextField(
                 value = state.query,
                 onValueChange = onQueryChange,

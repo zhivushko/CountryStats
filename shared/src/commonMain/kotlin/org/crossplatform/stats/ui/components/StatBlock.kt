@@ -10,7 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import org.crossplatform.stats.domain.Country
+import org.crossplatform.stats.domain.model.Country
 import org.crossplatform.stats.resources.Res
 import org.crossplatform.stats.resources.Res.string
 import org.crossplatform.stats.resources.country_capital

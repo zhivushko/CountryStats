@@ -1,6 +1,6 @@
 package org.crossplatform.stats.ui.detail
 
-import org.crossplatform.stats.domain.Country
+import org.crossplatform.stats.domain.model.Country
 import org.crossplatform.stats.ui.model.CountryCardUI
 
 data class CountryDetailedState(
