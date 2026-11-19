@@ -57,13 +57,12 @@ fun AppNavDisplay(
                     val state by listViewModel.state.collectAsState()
                     CountryListScreen(
                         state = state,
-                        onCountryClick = { id ->
-                            listViewModel.onIntent(CountryListIntent.CardClicked(id))
-                        },
-                        onQueryChange = { value ->
-                            listViewModel.onIntent(CountryListIntent.QueryChanged(value))
-                        }
+                        onCountryClick = { id -> listViewModel.onIntent(CountryListIntent.CardClicked(id)) },
+                        onQueryChange = { value -> listViewModel.onIntent(CountryListIntent.QueryChanged(value)) },
+                        onRetry = { listViewModel.onIntent(CountryListIntent.Retry) },
+                        onLoadMore = { listViewModel.onIntent(CountryListIntent.LoadMoreRequested) },
                     )
+
                 }
 
                 entry<Screen.Detail> { key ->
@@ -76,6 +75,7 @@ fun AppNavDisplay(
                         onCountryClick = { id ->
                             navigator.addToBackStack(Screen.Detail(id))
                         },
+                        onRetry = { detailViewModel.retry() },
                     )
                 }
             },

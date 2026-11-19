@@ -35,13 +35,11 @@ class NetworkCountryRepositoryImpl(
     private suspend fun ensureBase() {
         mutex.withLock {
             if (countries != null) return
-            val dtos = api.safeCall { api.getCountries() }
-            val population = api.safeCall {
-                api.getIndicatorValues(
-                    WorldBankIndicators.population,
-                    date = WorldBankIndicators.year
-                )
-            }
+            val dtos = api.getCountries()
+            val population = api.getIndicatorValues(
+                WorldBankIndicators.population,
+                date = WorldBankIndicators.year
+            )
             countries = dtos
                 .filter { !it.isAggregate && it.name.isNotBlank() && it.id.isNotBlank() }
                 .map { dto ->
@@ -53,12 +51,10 @@ class NetworkCountryRepositoryImpl(
     private suspend fun ensureGdp() {
         mutex.withLock {
             if (gdpLoaded || countries == null) return
-            val values = api.safeCall {
-                api.getIndicatorValues(
-                    WorldBankIndicators.gdp,
-                    date = WorldBankIndicators.year
-                )
-            }
+            val values = api.getIndicatorValues(
+                WorldBankIndicators.gdp,
+                date = WorldBankIndicators.year
+            )
             countries = countries?.map { country ->
                 country.copy(GDP = values[country.id.uppercase()]?.toLong() ?: country.GDP)
             }
@@ -69,18 +65,14 @@ class NetworkCountryRepositoryImpl(
     private suspend fun ensureDetail() {
         mutex.withLock {
             if (detailLoaded || countries == null) return
-            val urban = api.safeCall {
-                api.getIndicatorValues(
-                    WorldBankIndicators.urbanShare,
-                    date = WorldBankIndicators.year
-                )
-            }
-            val rural = api.safeCall {
-                api.getIndicatorValues(
-                    WorldBankIndicators.ruralShare,
-                    date = WorldBankIndicators.year
-                )
-            }
+            val urban = api.getIndicatorValues(
+                WorldBankIndicators.urbanShare,
+                date = WorldBankIndicators.year
+            )
+            val rural = api.getIndicatorValues(
+                WorldBankIndicators.ruralShare,
+                date = WorldBankIndicators.year
+            )
             countries = countries?.map { country ->
                 country.copy(
                     urb_tot = urban[country.id.uppercase()]?.toFloat() ?: country.urb_tot,

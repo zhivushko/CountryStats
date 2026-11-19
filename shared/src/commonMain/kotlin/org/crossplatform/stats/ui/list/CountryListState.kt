@@ -1,8 +1,19 @@
 package org.crossplatform.stats.ui.list
 
-import org.crossplatform.stats.domain.model.Country
+import org.crossplatform.stats.ui.model.CountryCardUI
+import org.jetbrains.compose.resources.StringResource
 
-data class CountryListState(
-    val query: String = "",
-    val items: List<Country> = emptyList()
-)
+sealed interface CountryListState {
+
+    data object Loading : CountryListState
+
+    data class Error(val messageRes: StringResource) : CountryListState
+
+    data class Success(
+        val query: String,
+        val items: List<CountryCardUI>,
+        val isLoadingMore: Boolean = false,
+        val loadMoreFailed: Boolean = false,
+        val hasMore: Boolean = false,
+    ) : CountryListState
+}

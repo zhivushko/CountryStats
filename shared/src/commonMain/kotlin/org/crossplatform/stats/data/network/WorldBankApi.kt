@@ -1,5 +1,5 @@
 package org.crossplatform.stats.data.network
-import org.crossplatform.stats.domain.model.LoadException
+
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.HttpRequestTimeoutException
 import io.ktor.client.plugins.ResponseException
@@ -24,13 +24,13 @@ class WorldBankApi(private val client: HttpClient) {
     suspend fun getCountriesPage(
         page: Int = 1,
         perPage: Int = 300
-    ): PaginatedResult<CountryDto> {
+    ): PaginatedResult<CountryDto> = safeCall {
         val text = client.get("country") {
             parameter("page", page)
             parameter("per_page", perPage)
             parameter("format", "json")
         }.bodyAsText()
-        return parsePaginated(text) { json.decodeFromJsonElement(CountryDto.serializer(), it) }
+        parsePaginated(text) { json.decodeFromJsonElement(CountryDto.serializer(), it) }
     }
 
     suspend fun getIndicatorPage(
@@ -38,21 +38,21 @@ class WorldBankApi(private val client: HttpClient) {
         page: Int = 1,
         perPage: Int = 500,
         date: String? = null
-    ): PaginatedResult<IndicatorRowDto> {
+    ): PaginatedResult<IndicatorRowDto> = safeCall {
         val text = client.get("country/all/indicator/$indicatorCode") {
             parameter("page", page)
             parameter("per_page", perPage)
             parameter("format", "json")
             if (date != null) parameter("date", date)
         }.bodyAsText()
-        return parsePaginated(text) { json.decodeFromJsonElement(IndicatorRowDto.serializer(), it) }
+        parsePaginated(text) { json.decodeFromJsonElement(IndicatorRowDto.serializer(), it) }
     }
 
-    suspend fun getCountry(code: String): CountryDto? {
+    suspend fun getCountry(code: String): CountryDto? = safeCall {
         val text = client.get("country/$code") {
             parameter("format", "json")
         }.bodyAsText()
-        return parsePaginated(text) { json.decodeFromJsonElement(CountryDto.serializer(), it) }
+        parsePaginated(text) { json.decodeFromJsonElement(CountryDto.serializer(), it) }
             .items.firstOrNull()
     }
 
@@ -65,10 +65,9 @@ class WorldBankApi(private val client: HttpClient) {
         date: String? = null
     ): Map<String, Double> {
         val map = mutableMapOf<String, Double>()
-        val result = paginate { page ->
+        paginate { page ->
             getIndicatorPage(indicatorCode, page = page, date = date)
-        }
-        result.forEach { row ->
+        }.forEach { row ->
             val code = row.countryIso3Code?.trim()?.uppercase() ?: return@forEach
             val value = row.value ?: return@forEach
             map[code] = value
@@ -98,10 +97,12 @@ class WorldBankApi(private val client: HttpClient) {
         val root: JsonElement = try {
             json.parseToJsonElement(text)
         } catch (e: Exception) {
-            throw LoadException.Server()
+            throw IllegalStateException("bad response", e)
         }
 
-        if (root !is JsonArray || root.size < 2) throw LoadException.Server()
+        if (root !is JsonArray || root.size < 2) {
+            throw IllegalStateException("bad response")
+        }
 
         val meta = root[0] as? JsonObject ?: JsonObject(emptyMap())
         val rows = root[1] as? JsonArray ?: JsonArray(emptyList())
@@ -114,21 +115,21 @@ class WorldBankApi(private val client: HttpClient) {
         }
         return PaginatedResult(items, page, pages)
     }
-    suspend fun <T> safeCall(block: suspend () -> T): T {
+
+    private suspend fun <T> safeCall(block: suspend () -> T): T {
         return try {
             block()
-        } catch (e: LoadException) {
-            throw e
         } catch (e: HttpRequestTimeoutException) {
-            throw LoadException.Network()
-        } catch (e: ResponseException) {
-            throw LoadException.Server()
-        } catch (e: SerializationException) {
-            throw LoadException.Server()
+            throw IllegalStateException("timeout", e)
         } catch (e: IOException) {
-            throw LoadException.Network()
+            throw IllegalStateException("network", e)
+        } catch (e: ResponseException) {
+            throw IllegalStateException("server", e)
+        } catch (e: SerializationException) {
+            throw IllegalStateException("server", e)
         }
     }
+
     companion object {
         private const val MAX_PAGES = 50
     }
