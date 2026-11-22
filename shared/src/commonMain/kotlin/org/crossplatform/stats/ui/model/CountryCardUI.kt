@@ -1,16 +1,14 @@
 package org.crossplatform.stats.ui.model
 
-import org.crossplatform.stats.data.Country
+import org.crossplatform.stats.domain.model.Country
 
 data class CountryCardUI(
-    val id: Int,
-    val code: String,
+    val id: String,
     val name: String,
     val popularity: Int,
     val GDP: Long,
 )
 fun Country.toCardUI(): CountryCardUI = CountryCardUI(
-    code = code,
     name = name,
     popularity = popularity,
     id = id,

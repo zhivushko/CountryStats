@@ -8,10 +8,19 @@
     <string name="country_urb">Городское население</string>
     <string name="country_rur">Сельское население</string>
     <string name="country_gdp">ВВП</string>
-    <string name = "country_code">Код страны</string>
-    <string name = "people_unit">чел.</string>
-    <string name = "country_neighbours">Страны-соседи</string>
-    <string name = "no_results">Не найдено :(</string>
-    <string name = "urbanization">Урбанизация</string>
-    <string name = "search">Поиск</string>
+    <string name="country_code">Код страны</string>
+    <string name="people_unit">чел.</string>
+    <string name="currency_unit">$</string>
+    <string name="country_neighbours">Соседи по региону</string>
+    <string name="no_results">Не найдено :(</string>
+    <string name="urbanization">Урбанизация</string>
+    <string name="search">Поиск</string>
+    <string name="retry">Повторить</string>
+    <string name="error_network">Нет соединения</string>
+    <string name="error_timeout">Таймаут соединения</string>
+    <string name="error_server">Ошибка сервера</string>
+    <string name="error_not_found">Страна не найдена</string>
+    <string name="list_loading_next">Загружается следующая страница...</string>
+    <string name="list_load_more_failed">Не удалось загрузить следующую страницу</string>
+    <string name="label_with_colon">%1$s:</string>
 </resources>

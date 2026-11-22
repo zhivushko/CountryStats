@@ -13,6 +13,7 @@ dependencies {
     implementation(libs.kotlinx.coroutinesSwing)
 
     implementation(libs.compose.uiToolingPreview)
+    implementation("io.ktor:ktor-client-cio:3.0.0")
 }
 
 compose.desktop {

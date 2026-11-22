@@ -7,7 +7,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import org.crossplatform.stats.navigation.AppNavDisplay
+import org.crossplatform.stats.ui.navigation.AppNavDisplay
 import org.crossplatform.stats.resources.Res
 import org.crossplatform.stats.resources.language
 import org.crossplatform.stats.resources.tonality

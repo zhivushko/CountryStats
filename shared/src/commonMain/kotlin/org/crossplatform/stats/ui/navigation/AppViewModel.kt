@@ -1,11 +1,10 @@
-package org.crossplatform.stats.navigation
+package org.crossplatform.stats.ui.navigation
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
-import org.crossplatform.stats.domain.Screen
 
 class AppViewModel : ViewModel() {
 

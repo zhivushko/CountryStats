@@ -30,7 +30,6 @@ fun CountryCard(
         Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
             Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                 CardNum(country.id)
-                Text(text = country.code)
                 Text(text = country.name)
             }
             Row(

@@ -16,13 +16,13 @@ import androidx.compose.ui.unit.dp
 import org.crossplatform.stats.ui.CardNumColor
 
 @Composable
-fun CardNum(value: Int)
+fun CardNum(value: String)
 {
     Row(modifier = Modifier
         .clip(RoundedCornerShape(4.dp))
         .background(CardNumColor)
         .padding(horizontal = 4.dp, vertical = 0.dp)   )
     {
-        Text(text = "#" + value.toString().padStart(3, '0'))
+        Text(text = value.uppercase())
     }
 }
