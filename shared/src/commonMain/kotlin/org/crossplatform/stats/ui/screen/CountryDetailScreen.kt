@@ -9,14 +9,14 @@ import androidx.compose.ui.Modifier
 import org.crossplatform.stats.ui.components.CountryDetailed
 import org.crossplatform.stats.ui.components.FullScreenError
 import org.crossplatform.stats.ui.components.FullScreenLoading
+import org.crossplatform.stats.ui.detail.CountryDetailIntent
 import org.crossplatform.stats.ui.detail.CountryDetailedState
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun CountryDetailScreen(
     state: CountryDetailedState,
-    onCountryClick: (String) -> Unit,
-    onRetry: () -> Unit,
+    onIntent: (CountryDetailIntent) -> Unit,
     modifier: Modifier = Modifier.fillMaxSize(),
 ) {
     when (state) {
@@ -24,7 +24,7 @@ fun CountryDetailScreen(
 
         is CountryDetailedState.Error -> FullScreenError(
             message = stringResource(state.messageRes),
-            onRetry = onRetry,
+            onRetry = { onIntent(CountryDetailIntent.RetryRequested) },
             modifier = modifier,
         )
 
@@ -35,7 +35,7 @@ fun CountryDetailScreen(
                 country = state.country,
                 neighbours = state.neighbours,
                 modifier = Modifier.fillMaxSize(),
-                onCountryClick = onCountryClick,
+                onCountryClick = { id -> onIntent(CountryDetailIntent.NeighbourClicked(id)) },
             )
         }
     }

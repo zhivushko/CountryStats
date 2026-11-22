@@ -8,18 +8,23 @@ import kotlinx.coroutines.launch
 import org.crossplatform.stats.domain.GetCountryInteractor
 import org.crossplatform.stats.ui.model.toCardsUI
 import org.crossplatform.stats.ui.model.toErrorMessageRes
+import org.crossplatform.stats.ui.navigation.AppViewModel
+import org.crossplatform.stats.ui.navigation.Screen
 
 class CountryDetailedViewModel(
+    private val countryId: String,
+    private val navigator: AppViewModel,
     private val interactor: GetCountryInteractor,
 ) : ViewModel() {
 
     private val _state = MutableStateFlow<CountryDetailedState>(CountryDetailedState.Loading)
     val state = _state.asStateFlow()
 
-    private var lastId: String? = null
+    init {
+        load()
+    }
 
-    fun load(countryId: String) {
-        lastId = countryId
+    private fun load() {
         _state.value = CountryDetailedState.Loading
 
         viewModelScope.launch {
@@ -38,7 +43,10 @@ class CountryDetailedViewModel(
         }
     }
 
-    fun retry() {
-        lastId?.let { load(it) }
+    fun onIntent(intent: CountryDetailIntent) {
+        when (intent) {
+            is CountryDetailIntent.NeighbourClicked -> navigator.addToBackStack(Screen.Detail(intent.id))
+            CountryDetailIntent.RetryRequested -> load()
+        }
     }
 }

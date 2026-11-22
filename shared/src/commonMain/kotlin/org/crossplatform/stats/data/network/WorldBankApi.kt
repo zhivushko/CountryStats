@@ -47,8 +47,18 @@ class WorldBankApi(private val client: HttpClient) {
             parameter("format", "json")
             if (date != null) parameter("date", date) else parameter("mrv", 1)
         }.bodyAsText()
-        parsePaginated(text) { json.decodeFromJsonElement(IndicatorRowDto.serializer(), it) }
-            .items.firstOrNull()?.value
+        val parsed = parsePaginated(text) { json.decodeFromJsonElement(IndicatorRowDto.serializer(), it) }
+        val value = parsed.items.firstOrNull()?.value
+        if (value == null && date != null) {
+            val fallbackText = client.get("country/$countryCode/indicator/$indicatorCode") {
+                parameter("format", "json")
+                parameter("mrv", 1)
+            }.bodyAsText()
+            parsePaginated(fallbackText) { json.decodeFromJsonElement(IndicatorRowDto.serializer(), it) }
+                .items.firstOrNull()?.value
+        } else {
+            value
+        }
     }
 
     suspend fun fetchIndicatorPage(

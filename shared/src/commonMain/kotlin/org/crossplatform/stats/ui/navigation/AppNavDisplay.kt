@@ -7,13 +7,14 @@ import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
 import androidx.navigation3.runtime.entryProvider
+import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
 import org.crossplatform.stats.data.InMemoryCountryRepository
 import org.crossplatform.stats.data.NetworkCountryRepositoryImpl
@@ -43,13 +44,6 @@ fun AppNavDisplay(
     }
 
     val navigator: AppViewModel = viewModel { AppViewModel() }
-    val listViewModel: CountryListViewModel = viewModel {
-        CountryListViewModel(navigator = navigator, getCountryInteractor = interactor)
-    }
-    val detailViewModel: CountryDetailedViewModel = viewModel {
-        CountryDetailedViewModel(interactor = interactor)
-    }
-
     val backStack by navigator.backStack.collectAsState()
 
     AppScaffold(
@@ -61,8 +55,15 @@ fun AppNavDisplay(
             backStack = backStack,
             onBack = navigator::onBack,
             modifier = Modifier.fillMaxSize(),
+            entryDecorators = listOf(
+                rememberSaveableStateHolderNavEntryDecorator(),
+                rememberViewModelStoreNavEntryDecorator(),
+            ),
             entryProvider = entryProvider {
                 entry<Screen.List> {
+                    val listViewModel: CountryListViewModel = viewModel {
+                        CountryListViewModel(navigator = navigator, getCountryInteractor = interactor)
+                    }
                     val state by listViewModel.state.collectAsState()
                     CountryListScreen(
                         state = state,
@@ -74,16 +75,17 @@ fun AppNavDisplay(
                 }
 
                 entry<Screen.Detail> { key ->
-                    LaunchedEffect(key.id) {
-                        detailViewModel.load(key.id)
+                    val detailViewModel: CountryDetailedViewModel = viewModel(key = key.id) {
+                        CountryDetailedViewModel(
+                            countryId = key.id,
+                            navigator = navigator,
+                            interactor = interactor,
+                        )
                     }
                     val state by detailViewModel.state.collectAsState()
                     CountryDetailScreen(
                         state = state,
-                        onCountryClick = { id ->
-                            navigator.addToBackStack(Screen.Detail(id))
-                        },
-                        onRetry = { detailViewModel.retry() },
+                        onIntent = detailViewModel::onIntent,
                     )
                 }
             },
