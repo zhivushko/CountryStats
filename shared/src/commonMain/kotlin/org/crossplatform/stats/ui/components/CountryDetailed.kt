@@ -12,6 +12,7 @@ import androidx.compose.ui.unit.dp
 import org.crossplatform.stats.domain.model.Country
 import org.crossplatform.stats.resources.Res
 import org.crossplatform.stats.resources.country_neighbours
+import org.crossplatform.stats.resources.label_with_colon
 import org.crossplatform.stats.ui.model.CountryCardUI
 import org.jetbrains.compose.resources.stringResource
 
@@ -28,10 +29,20 @@ fun CountryDetailed(
     ) {
         Text(text = country.name, style = MaterialTheme.typography.titleLarge)
         StatBlock(country = country)
-        UrbGraphic(country = country)
+
+        if (country.urb_tot > 0f || country.rur_tot > 0f) {
+            UrbGraphic(country = country)
+        }
+
         if (neighbours.isNotEmpty()) {
             Column {
-                Text(text = stringResource(Res.string.country_neighbours) + ":")
+                Text(
+                    text = stringResource(
+                        Res.string.label_with_colon,
+                        stringResource(Res.string.country_neighbours),
+                    ),
+                    style = MaterialTheme.typography.titleMedium,
+                )
                 Spacer(Modifier.height(16.dp))
                 CountryList(
                     countries = neighbours,

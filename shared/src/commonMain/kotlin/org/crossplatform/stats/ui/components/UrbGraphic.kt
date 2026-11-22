@@ -16,6 +16,7 @@ import org.crossplatform.stats.domain.model.Country
 import org.crossplatform.stats.resources.Res
 import org.crossplatform.stats.resources.country_rur
 import org.crossplatform.stats.resources.country_urb
+import org.crossplatform.stats.resources.label_with_colon
 import org.crossplatform.stats.resources.urbanization
 import org.jetbrains.compose.resources.stringResource
 
@@ -26,34 +27,37 @@ private val RurColor = Color(0xFF4A90E2)
 fun UrbGraphic(
     country: Country,
     modifier: Modifier = Modifier,
-
 ) {
     val maxHeight: Int = 600
     val minHeight: Int = 100
-    val urbHeight = (maxHeight * country.urb_tot / 100f).toInt().coerceIn(minHeight,maxHeight)
-    val rurHeight = (maxHeight * country.rur_tot / 100f).toInt().coerceIn(minHeight,maxHeight)
+    val urbHeight = (maxHeight * country.urb_tot / 100f).toInt().coerceIn(minHeight, maxHeight)
+    val rurHeight = (maxHeight * country.rur_tot / 100f).toInt().coerceIn(minHeight, maxHeight)
+
     Column {
-        Text(text = stringResource(Res.string.urbanization) + ":")
+        Text(
+            text = stringResource(
+                Res.string.label_with_colon,
+                stringResource(Res.string.urbanization),
+            )
+        )
         Spacer(Modifier.height(16.dp))
         Row(
-            modifier = modifier
-                .fillMaxWidth(),
+            modifier = modifier.fillMaxWidth(),
             verticalAlignment = Alignment.Bottom,
-            horizontalArrangement = Arrangement.Center
+            horizontalArrangement = Arrangement.Center,
         ) {
             Bar(
                 value = country.urb_tot,
                 height = urbHeight,
                 color = UrbColor,
-                name = stringResource(Res.string.country_urb)
+                name = stringResource(Res.string.country_urb),
             )
             Bar(
                 value = country.rur_tot,
                 height = rurHeight,
                 color = RurColor,
-                name = stringResource(Res.string.country_rur)
+                name = stringResource(Res.string.country_rur),
             )
         }
     }
-
 }

@@ -5,13 +5,12 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import org.crossplatform.stats.domain.repository.CountryRepository
-import org.crossplatform.stats.domain.repository.getNeighbours
+import org.crossplatform.stats.domain.GetCountryInteractor
 import org.crossplatform.stats.ui.model.toCardsUI
 import org.crossplatform.stats.ui.model.toErrorMessageRes
 
 class CountryDetailedViewModel(
-    private val repository: CountryRepository,
+    private val interactor: GetCountryInteractor,
 ) : ViewModel() {
 
     private val _state = MutableStateFlow<CountryDetailedState>(CountryDetailedState.Loading)
@@ -24,16 +23,18 @@ class CountryDetailedViewModel(
         _state.value = CountryDetailedState.Loading
 
         viewModelScope.launch {
-            _state.value = try {
-                val country = repository.getCountry(countryId)
-                val neighbours = repository.getNeighbours(country)
-                CountryDetailedState.Success(
-                    country = country,
-                    neighbours = neighbours.toCardsUI(),
-                )
-            } catch (e: Throwable) {
-                CountryDetailedState.Error(e.toErrorMessageRes())
-            }
+            _state.value = interactor.getById(countryId).fold(
+                onSuccess = { country ->
+                    val neighbours = interactor.getNeighbours(country)
+                    CountryDetailedState.Success(
+                        country = country,
+                        neighbours = neighbours.toCardsUI(),
+                    )
+                },
+                onFailure = { e ->
+                    CountryDetailedState.Error(e.toErrorMessageRes())
+                }
+            )
         }
     }
 

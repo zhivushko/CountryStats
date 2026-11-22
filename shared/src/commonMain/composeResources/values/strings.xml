@@ -1,22 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
     <string name="app_name">Country Stats</string>
-    <string name="country_name">Name</string>
-    <string name="country_capital">Capital</string>
-    <string name="country_region">Region</string>
-    <string name="country_popularity">Population</string>
-    <string name="country_urb">Urban population</string>
-    <string name="country_rur">Rural population</string>
-    <string name="country_gdp">GDP</string>
-    <string name="country_code">Country Code</string>
-    <string name="people_unit">people</string>
-    <string name="country_neighbours">Country neighbours</string>
-    <string name="no_results">Not found :(</string>
-    <string name="urbanization">Urbanization</string>
-    <string name="search">Search</string>
-    <string name="retry">Retry</string>
-    <string name="error_network">No connection</string>
-    <string name="error_timeout">Connection timeout</string>
-    <string name="error_server">Server error</string>
-    <string name="error_not_found">Country not found</string>
+    <string name="country_name">Название</string>
+    <string name="country_capital">Столица</string>
+    <string name="country_region">Регион</string>
+    <string name="country_popularity">Население</string>
+    <string name="country_urb">Городское население</string>
+    <string name="country_rur">Сельское население</string>
+    <string name="country_gdp">ВВП</string>
+    <string name="country_code">Код страны</string>
+    <string name="people_unit">чел.</string>
+    <string name="currency_unit">$</string>
+    <string name="country_neighbours">Соседи по региону</string>
+    <string name="no_results">Не найдено :(</string>
+    <string name="urbanization">Урбанизация</string>
+    <string name="search">Поиск</string>
+    <string name="retry">Повторить</string>
+    <string name="error_network">Нет соединения</string>
+    <string name="error_timeout">Таймаут соединения</string>
+    <string name="error_server">Ошибка сервера</string>
+    <string name="error_not_found">Страна не найдена</string>
+    <string name="list_loading_next">Загружается следующая страница...</string>
+    <string name="list_load_more_failed">Не удалось загрузить следующую страницу</string>
+    <string name="label_with_colon">%1$s:</string>
 </resources>

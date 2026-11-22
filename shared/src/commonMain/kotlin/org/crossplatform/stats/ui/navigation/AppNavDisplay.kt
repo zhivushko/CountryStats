@@ -15,10 +15,12 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.ui.NavDisplay
+import org.crossplatform.stats.data.InMemoryCountryRepository
 import org.crossplatform.stats.data.NetworkCountryRepositoryImpl
 import org.crossplatform.stats.data.network.WorldBankApi
 import org.crossplatform.stats.data.network.createHttpClient
-import org.crossplatform.stats.domain.repository.CountryRepository
+import org.crossplatform.stats.domain.GetCountryInteractor
+import org.crossplatform.stats.domain.LoadCountryUseCase
 import org.crossplatform.stats.ui.AppScaffold
 import org.crossplatform.stats.ui.detail.CountryDetailedViewModel
 import org.crossplatform.stats.ui.list.CountryListIntent
@@ -31,15 +33,22 @@ fun AppNavDisplay(
     modifier: Modifier = Modifier,
     actions: @Composable RowScope.() -> Unit = {},
 ) {
-    val httpClient = remember { createHttpClient() }
-    val api = remember { WorldBankApi(httpClient) }
-    val repository: CountryRepository = remember { NetworkCountryRepositoryImpl(api) }
+    val interactor: GetCountryInteractor = remember {
+        val httpClient = createHttpClient()
+        val api = WorldBankApi(httpClient)
+        val remote = NetworkCountryRepositoryImpl(api)
+        val local = InMemoryCountryRepository()
+        val loadCountryUseCase = LoadCountryUseCase(remote, pageSize = 15)
+        GetCountryInteractor(loadCountryUseCase, remote, local)
+    }
 
     val navigator: AppViewModel = viewModel { AppViewModel() }
     val listViewModel: CountryListViewModel = viewModel {
-        CountryListViewModel(navigator = navigator, repository = repository)
+        CountryListViewModel(navigator = navigator, getCountryInteractor = interactor)
     }
-    val detailViewModel = viewModel { CountryDetailedViewModel(repository = repository) }
+    val detailViewModel: CountryDetailedViewModel = viewModel {
+        CountryDetailedViewModel(interactor = interactor)
+    }
 
     val backStack by navigator.backStack.collectAsState()
 
@@ -62,7 +71,6 @@ fun AppNavDisplay(
                         onRetry = { listViewModel.onIntent(CountryListIntent.Retry) },
                         onLoadMore = { listViewModel.onIntent(CountryListIntent.LoadMoreRequested) },
                     )
-
                 }
 
                 entry<Screen.Detail> { key ->
